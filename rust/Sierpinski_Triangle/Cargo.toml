@@ -1,0 +1,8 @@
+[package]
+name = "Sierpinski_Triangle"
+version = "0.1.0"
+authors = ["Jeffry Angtoni <jeffryangtoni24@gmail.com>"]
+
+[dependencies]
+image = "*"
+rand = "*"
