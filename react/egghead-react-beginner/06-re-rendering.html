@@ -1,0 +1,24 @@
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/prop-types@latest/prop-types.js"></script>
+<script type="text/babel">
+    const rootElement = document.getElementById('root');
+
+    // Function component
+    function Time({time}) {
+        return <div>It is <input value={time} /></div>
+    }
+
+    function tick() {
+        const time = new Date().toLocaleTimeString();
+
+        const element = <Time time={time} />
+
+        console.log(element);
+        ReactDOM.render(element, rootElement);
+    }
+
+    setInterval(tick, 1000);
+</script>

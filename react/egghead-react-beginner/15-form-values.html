@@ -1,0 +1,97 @@
+<div id="toggle"></div>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/prop-types@latest/prop-types.js"></script>
+<script crossorigin src="https://unpkg.com/vanilla-tilt@latest/dist/vanilla-tilt.js"></script>
+<script type="text/babel">
+    const rootElement = document.getElementById('root');
+
+    class NameForm extends React.Component {
+        state = {multiline: '', commaSeparated: '', multiselect: []};
+
+        static availableOptions = [
+            'apple',
+            'grape',
+            'cherry',
+            'orange',
+            'pear',
+            'peach',
+        ];
+
+        handleCommaSeparatedChange = event => {
+            const {value} = event.target;
+            const allVals = value.split(',').map(v => v.trim()).filter(Boolean);
+
+            this.setState({
+                commaSeparated: value,
+                multiline: allVals.join('\n'),
+                multiselect: allVals.filter(v => NameForm.availableOptions.includes(v))
+            });
+        }
+
+        handleMultilineChange = event => {
+            const {value} = event.target;
+            const allVals = value.split('\n').map(v => v.trim()).filter(Boolean);
+
+            this.setState({
+                commaSeparated: allVals.join(','),
+                multiline: value,
+                multiselect: allVals.filter(v => NameForm.availableOptions.includes(v))
+            });
+        }
+
+        handleMultiSelectChange = event => {
+            const allVals = Array.from(event.target.selectedOptions).map(o => o.value);
+
+            this.setState({
+                multiselect: allVals,
+                multiline: allVals.join('\n'),
+                commaSeparated: allVals.join(',')
+            })
+        }
+
+        handleSubmit = event => {
+            event.preventDefault();
+        }
+
+        render() {
+            const {commaSeparated, multiline, multiselect} = this.state;
+            return (
+                <form onSubmit={this.handleSubmit}>
+                    <div>
+                        <label>Comma separated values:<br />
+                        <input type="text" onChange={this.handleCommaSeparatedChange}
+                        value={commaSeparated} />
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>multiline values:<br />
+                        <textarea rows={NameForm.availableOptions.length} onChange={this.handleMultilineChange}
+                        value={multiline} />
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>multiselect values:<br />
+                            <select multiple
+                            value={multiselect} size={NameForm.availableOptions.length} onChange={this.handleMultiSelectChange}>
+                                {NameForm.availableOptions.map(v => (
+                                    <option key={v} value={v}>{v}</option>
+                                ))}
+                            </select>
+                        </label>
+                    </div>
+                </form>
+            );
+        }
+    }
+
+    const element = (
+        <NameForm />
+    );
+
+    ReactDOM.render(element, rootElement);
+</script>

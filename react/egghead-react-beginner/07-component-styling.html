@@ -1,0 +1,57 @@
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/prop-types@latest/prop-types.js"></script>
+<style>
+    .box {
+        border: 1px solid black;
+    }
+
+    .box--small {
+        width: 30%;
+        height: 80px;
+    }
+
+    .box--medium {
+        width: 60%;
+        height: 80px;
+    }
+
+    .box--large {
+        width: 90%;
+        height: 80px;
+    }
+</style>
+<script type="text/babel">
+    const rootElement = document.getElementById('root');
+
+    const className = 'box box--small';
+
+    // Function component
+    function Time({style, size, className = '', ...rest}) {
+        const sizeClassName = size ? `box--${size}` : '';
+        return <div 
+            className={`box ${className} ${sizeClassName}`.trim()}
+            style={{paddingLeft: '2em', ...style}}>It is {rest.time}</div>
+    }
+
+    function tick() {
+        const time = new Date().toLocaleTimeString();
+
+        const element = (
+            <div>
+                <Time size="small" time={time} style={{backgroundColor: 'lime', fontSize: '18px'}} />
+
+                <Time size="medium" time={time} style={{backgroundColor: 'orange', fontSize: '18px'}} />
+
+                <Time size="large" time={time} style={{backgroundColor: 'lightblue', fontSize: '18px'}} />
+            </div>
+        );
+
+        console.log(element);
+        ReactDOM.render(element, rootElement);
+    }
+
+    setInterval(tick, 1000);
+</script>

@@ -1,0 +1,19 @@
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+<script>
+    const rootElement = document.getElementById('root');
+    /*const element = document.createElement('div');
+    element.textContent = 'Hello World!';
+    element.className = 'container';
+    rootElement.appendChild(element);*/
+
+    const element = React.createElement(
+        'div', {
+            className: 'container',
+            children: 'Hello world',
+        }
+    );
+    console.log(element);
+    ReactDOM.render(element, rootElement);
+</script>

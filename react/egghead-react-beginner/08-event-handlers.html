@@ -1,0 +1,53 @@
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/prop-types@latest/prop-types.js"></script>
+<script type="text/babel">
+    const rootElement = document.getElementById('root');
+
+    const state = {eventCount: 0, username: ''};
+
+    // Function component
+    function App() {
+        return (
+            <div>
+                <p>There have been {state.eventCount} events</p>
+                <p>
+                    <button onMouseOver={increment}>Click me</button>
+                </p>
+                <p>You typed: {state.username}</p>
+                <p>
+                    <input onChange={changed} />
+                </p>
+            </div>
+        )
+    }
+
+    function increment() {
+        setState({
+            eventCount: state.eventCount + 1,
+        });
+    }
+
+    function changed(event) {
+        console.log(event);
+        setState({
+            username: event.target.value
+        })
+    }
+
+    function setState(newState) {
+        Object.assign(state, newState);
+        renderApp();
+    }
+
+    function renderApp() {
+        const element = <App />;
+
+        console.log(element);
+        ReactDOM.render(element, rootElement);
+    }
+
+    renderApp();
+</script>

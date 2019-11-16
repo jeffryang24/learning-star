@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Counter reducer</title>
+    <script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/expect@1.20.2/umd/expect.js"></script>
+    <script crossorigin src="https://unpkg.com/redux@latest/dist/redux.js"></script>
+</head>
+<body>
+    <script>
+        const counter = (state = 0, action) => {
+            switch (action.type) {
+                case 'INCREMENT': 
+                    return state + 1;
+                
+                case 'DECREMENT': 
+                    return state - 1;
+
+                default: 
+                    return state;
+            }
+        }
+
+        const {createStore} = Redux;
+        const store = createStore(counter);
+
+        // get initial state
+        //console.log(store.getState());
+
+        // dispatch action
+        //store.dispatch({type: 'INCREMENT'});
+
+        // get current state
+        //console.log(store.getState());
+
+        const render = () => {
+            document.body.innerText = store.getState();
+        };
+
+        store.subscribe(render);
+        render();
+
+        document.addEventListener('click', () => {
+            store.dispatch({type: 'INCREMENT'});
+        });
+
+        // Testing
+        expect(
+            counter(0, {type: 'INCREMENT'})
+        ).toEqual(1);
+
+        expect(
+            counter(1, {type: 'INCREMENT'})
+        ).toEqual(2);
+
+        expect(
+            counter(2, {type: 'DECREMENT'})
+        ).toEqual(1);
+
+        expect(
+            counter(1, {type: 'DECREMENT'})
+        ).toEqual(0);
+
+        expect(
+            counter(1, {type: 'SOMETHING_ELSE'})
+        ).toEqual(1);
+
+        expect(
+            counter(undefined, {})
+        ).toEqual(0);
+
+        console.log('Tests passed!');
+    </script>
+</body>
+</html>

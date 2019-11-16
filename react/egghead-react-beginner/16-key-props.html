@@ -1,0 +1,107 @@
+<div id="toggle"></div>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/prop-types@latest/prop-types.js"></script>
+<script crossorigin src="https://unpkg.com/vanilla-tilt@latest/dist/vanilla-tilt.js"></script>
+<style>
+    div {
+        color: white;
+    }
+
+    div .black {
+        color: black;
+    }
+
+    .tilt-root {
+        height: 150px;
+        background-color: red;
+        width: 200px;
+    }
+
+    .tilt-child {
+        background-image: -webkit-linear-gradient(315deg, #ff008a 0%, #101c25 100%);
+        background-image: linear-gradient(135deg, #ff008a 0%, #101c25 100%);
+    }
+
+    .totally-centered {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<script type="text/babel">
+    const rootElement = document.getElementById('root');
+
+    class Tilt extends React.Component {
+        state = {items: []};
+
+        componentDidMount() {
+            VanillaTilt.init(this.rootNode, {
+                max: 25,
+                speed: 400,
+                glare: true,
+                'max-glare': 0.5,
+            });
+        }
+
+        static allItems = [
+            {id: 'a', value: 'apple'},
+            {id: 'b', value: 'orange'},
+            {id: 'c', value: 'grape'},
+            {id: 'd', value: 'pear'},
+        ];
+
+        addItem = () => {
+            this.setState(({items}) => ({
+                items: [
+                    ...items,
+                    Tilt.allItems.find(i => !items.includes(i))
+                ]
+            }));
+        };
+
+        removeItem = item => {
+            this.setState(({items}) => ({
+                items: items.filter(i => i !== item)
+            }));
+        };
+
+        render() {
+            const {items} = this.state;
+            return (
+                <div ref={node => this.rootNode = node} className="tilt-root">
+                    <div {...this.props} className="tilt-child">
+
+                    </div>
+                    <button disabled={items.length >= Tilt.allItems.length} type="button" ref={node => this.buttonNode = node} onClick={this.addItem}>+</button>
+                    {items.map((v, i) => (
+                        <div key={v.id} className="black">
+                            <button onClick={() => this.removeItem(v)} type="button">-</button>
+                            {v.value}: <input />
+                        </div>
+                    ))}
+                </div>
+            )
+        }
+    }
+
+    const element = (
+        <div className="totally-centered">
+            <Tilt>
+                <div className="totally-centered">
+                    <div>
+                        {Tilt.allItems.map(v => (
+                            <div key={v.id}>{v.value}</div>
+                        ))}
+                    </div>
+                </div>
+            </Tilt>
+        </div>
+    );
+
+    ReactDOM.render(element, rootElement);
+</script>

@@ -1,0 +1,77 @@
+<div id="toggle"></div>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/prop-types@latest/prop-types.js"></script>
+<script type="text/babel">
+    const rootElement = document.getElementById('root');
+
+    function HideToggle() {
+        return (<div><input type="checkbox" onChange={handleHideClick} /> Hide me</div>);
+    }
+
+    // trigger memory leak
+    function handleHideClick(event){
+        if (event.target.checked == false) {
+            ReactDOM.render(<StopWatch />, rootElement);
+        }else{
+            ReactDOM.unmountComponentAtNode(document.getElementById('root'));
+        }
+    };
+
+    class StopWatch extends React.Component {
+        state = {lapse: 0, running: false};
+        
+        handleStartClick = () => {
+            this.setState(state => {
+                if (state.running) {
+                    clearInterval(this.timer);
+                } else {
+                    const startTime = Date.now() - this.state.lapse;
+                    this.timer = setInterval(() => {
+                        this.setState({lapse: Date.now() - startTime
+                        }, () => {
+                            console.log(this.state.lapse);
+                        });
+                    });
+                }
+
+                return this.setState({running: !state.running});
+            });
+        };
+
+        handleClearClick = () => {
+            clearInterval(this.timer);
+            this.setState({lapse: 0, running: false});
+        };
+
+        // prevent memory leak. On react 16, it is already prevented by notifying the developer from the console.
+        componentWillUnmount() {
+            clearInterval(this.timer);
+        }
+
+        render() {
+            const {lapse, running} = this.state;
+            const buttonStyles = {
+                border: '1px solid #ccc',
+                background: 'transparent',
+                fontSize: '2em',
+                padding: 15,
+                margin: 5,
+                width: 200
+            };
+            
+            return (
+                <div style={{textAlign: 'center'}}>
+                    <label style={{fontSize: '5em', display: 'block'}}>{lapse} ms</label>
+                    <button onClick={this.handleStartClick} style={buttonStyles}>{running ? 'Stop' : 'Start'}</button>
+                    <button onClick={this.handleClearClick} style={buttonStyles}>Clear</button>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(<StopWatch />, rootElement);
+    ReactDOM.render(<HideToggle />, document.getElementById('toggle'));
+</script>

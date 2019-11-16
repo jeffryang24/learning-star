@@ -1,0 +1,53 @@
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/prop-types@latest/prop-types.js"></script>
+<script type="text/babel">
+    const rootElement = document.getElementById('root');
+    
+    // Function component
+    /*function SayHello(props) {
+        return (
+            <div>
+                Hello {props.firstName} {props.lastName || 'Unknown'}!
+            </div>
+        )
+    }*/
+
+    // Conventional PropTypes implementation
+    /*const PropTypes = {
+        string(props, propName, componentName) {
+            if (typeof props[propName] !== 'string') {
+                return new Error(`Hey, you should pass a string for ${propName} in ${componentName}, but you pass a ${typeof props[propName]} in ${propName}`);
+            }
+        }
+    }*/
+
+    // validate props for functional components
+    /*SayHello.propTypes = {
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+    };*/
+
+    // Class component
+    class SayHello extends React.Component {
+        static propTypes = {
+            firstName: PropTypes.string.isRequired,
+            lastName: PropTypes.string.isRequired,
+        }
+        render() {
+            const {firstName, lastName} = this.props;
+            return (
+                <div>
+                    Hello, {firstName} {lastName || 'Unknown'}!
+                </div>
+            )
+        }
+    }
+
+    const element = <SayHello firstName={true} />
+
+    console.log(element);
+    ReactDOM.render(element, rootElement);
+</script>

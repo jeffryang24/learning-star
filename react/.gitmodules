@@ -1,0 +1,4 @@
+[submodule "realworld-app/realworld-00"]
+	path = realworld-app/realworld-00
+	url = git@github.com:jeffryang24/react-redux-realworld-example-app.git 
+	branch = 00

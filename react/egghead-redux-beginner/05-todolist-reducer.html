@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Counter reducer</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/expect@1.20.2/umd/expect.js"></script>
+    <script crossorigin src="https://unpkg.com/redux@latest/dist/redux.js"></script>
+    <script crossorigin src="https://wzrd.in/standalone/deep-freeze@latest"></script>
+    <script type="text/babel">
+        const root = document.getElementById('root');
+
+        const {createStore} = Redux;
+
+        const todos = (state = [], action) => {
+            switch(action.type) {
+                case 'ADD_TODO':
+                    return [
+                        ...state,
+                        {
+                            id: action.id,
+                            text: action.text,
+                            completed: false
+                        }
+                    ];
+
+                case 'TOGGLE_TODO':
+                    return state.map(todo => {
+                        if (todo.id !== action.id) {
+                            return todo;
+                        }
+
+                        return {
+                            ...todo,
+                            completed: !todo.completed
+                        };
+                    });
+
+                default:
+                    return state;
+            }
+        };
+
+        const visibilityFilter = (state = 'SHOW_ALL', action) => {
+            switch (action.type) {
+                case 'SET_VISIBILITY_FILTER':
+                    return action.filter;
+
+                default:
+                    return state;
+            }
+        };
+        const {combineReducers} = Redux;
+
+        // you can change this using combineReducers
+        /*const todoApp = (state = [], action) => {
+            return {
+                todos: todos(state.todos, action),
+                visibilityFilter: visibilityFilter(state.visibilityFilter, action)
+            };
+        };*/
+        const todoApp = combineReducers({
+            todos,
+            visibilityFilter
+        });
+
+        const store = createStore(todoApp);
+
+        console.log('Initial State:');
+        console.log(store.getState());
+        console.log('--------------');
+
+        console.log('Dispatching ADD_TODO:');
+        console.log(store.dispatch({
+            type: 'ADD_TODO',
+            id: 0,
+            text: 'Learn Redux'
+        }));
+        console.log('Current State:');
+        console.log(store.getState());
+        console.log('--------------');
+
+        console.log('Dispatching ADD_TODO:');
+        console.log(store.dispatch({
+            type: 'ADD_TODO',
+            id: 1,
+            text: 'Go Shopping'
+        }));
+        console.log('Current State:');
+        console.log(store.getState());
+        console.log('--------------');
+
+        console.log('Dispatching TOGGLE_TODO:');
+        console.log(store.dispatch({
+            type: 'TOGGLE_TODO',
+            id: 0
+        }));
+        console.log('Current State:');
+        console.log(store.getState());
+        console.log('--------------');
+
+        console.log('Dispatching SET_VISIBILITY:');
+        console.log(store.dispatch({
+            type: 'SET_VISIBILITY',
+            filter: 'SHOW_COMPLETED'
+        }));
+        console.log('Current State:');
+        console.log(store.getState());
+        console.log('--------------');
+    </script>
+</body>
+</html>

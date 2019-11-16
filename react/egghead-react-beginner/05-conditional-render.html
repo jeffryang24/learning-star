@@ -1,0 +1,18 @@
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/prop-types@latest/prop-types.js"></script>
+<script type="text/babel">
+    const rootElement = document.getElementById('root');
+    
+    // Function component
+    function Message({message}) {
+        return <div>{message ? message : 'No Message'}</div>
+    }
+
+    const element = <Message message={null} />
+
+    console.log(element);
+    ReactDOM.render(element, rootElement);
+</script>

@@ -1,0 +1,94 @@
+<div id="toggle"></div>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@latest/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/prop-types@latest/prop-types.js"></script>
+<script crossorigin src="https://unpkg.com/vanilla-tilt@latest/dist/vanilla-tilt.js"></script>
+<script crossorigin src="https://unpkg.com/axios@latest/dist/axios.js"></script>
+<style>s
+    div {
+        color: white;
+    }
+
+    div .black {
+        color: black;
+    }
+
+    .tilt-root {
+        height: 150px;
+        background-color: red;
+        width: 200px;
+    }
+
+    .tilt-child {
+        background-image: -webkit-linear-gradient(315deg, #ff008a 0%, #101c25 100%);
+        background-image: linear-gradient(135deg, #ff008a 0%, #101c25 100%);
+    }
+
+    .totally-centered {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<script type="text/babel">
+    const rootElement = document.getElementById('root');
+
+    class Tilt extends React.Component {
+        state = {company: undefined, loaded: false};
+
+        componentDidMount() {
+            VanillaTilt.init(this.rootNode, {
+                max: 25,
+                speed: 400,
+                glare: true,
+                'max-glare': 0.5,
+            });
+
+            axios({
+                url: 'https://api.github.com/graphql',
+                method: 'post',
+                data: {
+                    query: `{
+                        user(login: "${this.props.username}") {
+                            company
+                        }
+                    }`
+                },
+                headers: {
+                    Authorization: `bearer c5fb7b6f9f2af75d3e60e8d237b64d808bba6020`
+                }
+            }).then(response => {
+                console.log(response);
+                this.setState({
+                    loaded: true,
+                    company: response.data.data.user.company
+                });
+            }, error => {
+                this.setState({
+                    error,
+                    loaded: true
+                });
+            });
+        }
+
+        render() {
+            return this.state.error ? this.state.error : (this.state.loaded ? (this.state.company || 'Unknown') : 'Loading...');
+        }
+    }
+
+    const username = 'jeffryang24'
+    const element = (
+        <div className="totally-centered">
+            <div className="totally-centered">
+                {`@${username} works at `}
+                <Tilt username={username} />
+            </div>
+        </div>
+    );
+
+    ReactDOM.render(element, rootElement);
+</script>
