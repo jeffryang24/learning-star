@@ -1,0 +1,25 @@
+{
+  "name": "hello-world-rabbit-mq-js",
+  "version": "1.0.0",
+  "description": "Hello World RabbitMQ in JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeffryang24/rabbitmq-learning.git"
+  },
+  "keywords": [
+    "rabbitmq"
+  ],
+  "author": "Jeffry Angtoni",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeffryang24/rabbitmq-learning/issues"
+  },
+  "homepage": "https://github.com/jeffryang24/rabbitmq-learning#readme",
+  "dependencies": {
+    "amqplib": "^0.5.2"
+  }
+}
