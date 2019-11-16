@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Currency Converter</string>
+    <string name="lblConvert">Enter the amount you want to convert</string>
+</resources>
