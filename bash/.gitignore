@@ -1,0 +1,12 @@
+.vscode
+
+### JupyterNotebook ###
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# ignoring nohup log when
+# running jupyter from background
+nohup.out
+
+# ignoring temp_ pattern
+tmp_*
