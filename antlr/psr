@@ -1,0 +1,325 @@
+#!/usr/bin/env bash
+#
+set -o errexit
+
+_ME="$(basename "$0")"
+# It must be depend on user execution directory,
+# not by file location.
+_CURRENT_DIRECTORY="$(cd "$(dirname "$0")" && pwd)"
+
+_ANTLR_DOWNLOAD_POINT="http://www.antlr.org/download"
+_ANTLR4_JAR_VERSION="4.7.1"
+_ANTLR4_JAR="antlr-${_ANTLR4_JAR_VERSION}-complete.jar"
+_LIB_DIRECTORY="/usr/local/lib"
+
+_ANTLR4="java -Xmx500M -cp \"${_LIB_DIRECTORY}/${_ANTLR4_JAR}:${CLASSPATH}\" org.antlr.v4.Tool"
+_DEFAULT_LANGUAGE="Java"
+_OUTPUT_DIR="."
+_OUTPUT_PATH="$(pwd)/${_OUTPUT_DIR}"
+
+_GRAMMARS_DIR="grammars"
+
+is_exist_antlr4() {
+  if [[ -f "${_LIB_DIRECTORY}/${_ANTLR4_JAR}" ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+install_antlr4() {
+  if ! is_exist_antlr4; then
+    printf "%s\n" "Downloading ANTLR4 ${_ANTLR4_JAR_VERSION} Tool..."
+    if command -v curl >/dev/null 2>&1; then
+      sudo curl -o "${_LIB_DIRECTORY}/${_ANTLR4_JAR}" "${_ANTLR_DOWNLOAD_POINT}/${_ANTLR4_JAR}"
+    else
+      sudo wget --output-document="${_LIB_DIRECTORY}/${_ANTLR4_JAR}" "${_ANTLR_DOWNLOAD_POINT}/${_ANTLR4_JAR}"
+    fi
+
+    printf "%s\n" "Chmod-ing 755 to ANTLR4 tool."
+    sudo chmod 755 "${_LIB_DIRECTORY}/${_ANTLR4_JAR}"
+
+    printf "%s\n" "Add antlr4 to classpath..."
+    if ! grep -Fq ":${_LIB_DIRECTORY}/${_ANTLR4_JAR}:" "${HOME}/.bashrc"; then
+      cat <<EOF >> "${HOME}/.bashrc"
+
+# Add ANTLR4 to CLASSPATH
+export CLASSPATH=".:${_LIB_DIRECTORY}/${_ANTLR4_JAR}:${CLASSPATH}"
+EOF
+    fi
+
+    printf "%s\n" "Add alias for antlr4 and grun..."
+    if ! grep -Fq "alias antlr4=" "${HOME}/.bashrc"; then
+      cat <<EOF >> "${HOME}/.bashrc"
+
+# Export antlr4 alias
+alias antlr4='java -Xmx500M -cp "${_LIB_DIRECTORY}/{_ANTLR4_JAR}:$CLASSPATH" org.antlr.v4.Tool'
+EOF
+    fi
+
+    if ! grep -Fq "alias grun=" "${HOME}/.bashrc"; then
+      cat <<EOF >> "${HOME}/.bashrc"
+
+# Export grun alias
+alias grun='java org.antlr.v4.gui.TestRig'
+EOF
+    fi
+
+    printf "%s\n" "ANTLR4 was successfully configured. Well done :D"
+    printf "%s\n\n" "================================================"
+
+    lite_install
+  else
+    printf "%s\n" "ANTLR4 is already installed on your rig."
+  fi
+}
+
+lite_install() {
+  local _lite_install_file="psr_activate"
+  cat <<EOF > "${_lite_install_file}"
+#!/usr/bin/env bash
+# Activate antlr4-l environment
+printf "%s\n" "Activating psr in virtualenv mode."
+
+psr_stop() {
+  # Unset -_ANTLR4_L_VENV variable.
+  if [[ ! -z "\${_PSR_VENV+_}" ]]; then
+    unset _PSR_VENV
+  fi
+
+  # Reset path
+  if [[ ! -z "\${_OLD_PATH+_}" ]]; then
+    PATH="\${_OLD_PATH}"
+    export PATH
+    unset _OLD_PATH
+  fi
+
+  # Forget passed command.
+  if [[ -n "\${BASH-}" ]] && [[ -n "\${ZSH_VERSION-}" ]]; then
+    hash -r 2>/dev/null
+  fi
+
+  if [[ "\${1:-}" != "safe" ]]; then
+    unset -f psr_stop
+  fi
+}
+
+psr_stop safe
+
+# Export _PSR_VENV.
+_PSR_VENV="${_CURRENT_DIRECTORY}"
+export _PSR_VENV
+
+# Export new path
+_OLD_PATH="\${PATH}"
+PATH="\${_PSR_VENV}:\${PATH}"
+export PATH
+
+if [[ -n "\${BASH-}" ]] && [[ -n "\${ZSH_VERSION-}" ]]; then
+  hash -r 2>/dev/null
+fi
+
+printf "%s\n" "You can use 'psr' now in any directory."
+EOF
+chmod +x "${_lite_install_file}"
+printf "%s\n" "Activation script was generated. Use 'source ${_lite_install_file}' to activate current directory."
+}
+
+uninstall_antlr4() {
+  printf "%s\n" "Removing ANTLR4 and all of its configuration."
+  # Remove jar
+  sudo rm -rf "${_LIB_DIRECTORY}/${_ANTLR4_JAR}"
+
+  # Remove classpath
+  sed -i -e '/alias antlr4/d' -e '/alias grun/d' "${HOME}/.bashrc"
+
+  printf "%s\n" "ANTLR4 was successfully removed. Well Done :'("
+  printf "%s\n" "=============================================="
+}
+
+install_vscode_ext() {
+  if command -v code >/dev/null 2>&1; then
+    printf "%s\n" "Installing ANTLR4 VSCode Extension."
+    code --install-extension mike-lischke.vscode-antlr4
+  else
+    printf "%s\n" "VSCode is not installed. So, no can I do for you.. :D"
+  fi
+}
+
+psr_ln() {
+  if [[ "$#" -gt 0 ]]; then
+    local _u_grammar_dir
+    local -a _positional_param
+
+    while [[ "$#" -gt 0 ]]; do
+      local _arg="$1"
+      case ${_arg} in
+        --grammar-dir=*)
+          _u_grammar_dir="${_arg#*=}"
+          shift
+          ;;
+
+        *)
+          _positional_param+=("${_arg}")
+          shift
+          ;;
+      esac
+    done
+
+    # Restore positional arguments
+    eval set -- "${_positional_param[@]}"
+
+    if [[ -z "$1" ]] || [[ -z "$2" ]]; then
+      printf "%s\n" "Action was aborted. Grammar filename and directory target is required."
+      exit 1
+    fi
+
+    local _grammar_file="${1}"
+    local _directory_target="${2}"
+
+    # check _grammar_file is star-card or not?
+    if [[ "${_grammar_file}" == "all" ]]; then
+      for _g_file in ${_u_grammar_dir:-${_GRAMMARS_DIR}}/*.g4; do
+        local _tmp_file="${_g_file##*/}"
+        local _tmp_file_name="${_tmp_file%%.g4}"
+        printf "%s" "Cloning grammar '${_tmp_file}' to target directory. "
+        sed -e "s/${_tmp_file_name}/PSR_${_tmp_file_name}/" < "${_g_file}" > "${_CURRENT_DIRECTORY}/${_directory_target}/PSR_${_tmp_file}"
+        printf "%s\n" "Done."
+      done
+    else
+      local _grammar_fullpath="${_u_grammar_dir:-${_GRAMMARS_DIR}}/${_grammar_file}.g4"
+      if [[ -f "${_grammar_fullpath}" ]]; then
+        printf "%s" "Cloning grammar '${_grammar_file}.g4' to target directory. "
+        sed -e "s/${_grammar_file}/PSR_${_grammar_file}/" < "${_grammar_fullpath}" > "${_CURRENT_DIRECTORY}/${_directory_target}/PSR_${_grammar_file}.g4"
+        printf "%s\n" "Done."
+      else
+        printf "%s\n" "File does not exist at '${_grammar_fullpath}'."
+      fi
+    fi
+  else
+    psr_ln_help
+  fi
+}
+
+psr_ln_help() {
+  local _help_ln
+  _help_ln="$(cat <<EOF
+Usage:
+    ${_ME} ln [options] [Grammar Filename] [Directory Target]
+
+Arguments:
+    --grammar-dir=[absolute_path]        ~> Set grammar directory instead of using the default.
+
+Use star-card (*) to select all grammar files, but star-card (*) is not available for
+directory target. Default grammars directory is '${_GRAMMARS_DIR}'. Directory target must
+relative to project directory.
+EOF
+)"
+  printf "%s\n" "${_help_ln}"
+  exit 0
+}
+
+help() {
+  local _help
+  _help="$(cat <<EOF
+Usage:
+    ${_ME} [psr argument(s)] [antlr4-argument(s)]
+
+Arguments:
+    install                     ~> To install antlr4 tool to your rig.
+    lite-install                ~> Just generate activation script for current directory.
+    vscode-ext                  ~> Install ANTLR4 extension in VSCode Editor.
+    ln                          ~> Link grammar to specific folder.
+    uninstall                   ~> Uninstall antlr4 tool from your rig.
+    --lang=[LanguageTarget]     ~> Set language target, ex. Python3, Python2, Java.
+    --out=[OutputDir]           ~> Set generation result directory.
+    [antlr4-tool-argument]      ~> ANTLR4 Tool argument(s)
+
+Default language target is Java and OutputDir is "${_OUTPUT_DIR}".
+EOF
+)"
+  printf "%s\n" "${_help}"
+  exit 0
+}
+
+main() {
+  if [[ "$#" -eq "0" ]]; then
+    help
+  fi
+
+  local _u_language
+  local _u_out_dir
+
+  local -a _positional_param=()
+
+  while [[ "$#" -gt 0 ]]; do
+    local key="$1"
+
+    case ${key} in
+      --help)
+        shift
+        help
+        ;;
+
+      install)
+        shift
+        install_antlr4
+        exit $?
+        ;;
+
+      lite-install)
+        shift
+        lite_install
+        exit $?
+        ;;
+
+      uninstall)
+        shift
+        uninstall_antlr4
+        exit $?
+        ;;
+
+      vscode-ext)
+        shift
+        install_vscode_ext
+        exit $?
+        ;;
+
+      ln)
+        shift
+        local -a _ln_param=("${@:1}")
+        psr_ln "${_ln_param[@]}"
+        exit $?
+        ;;
+
+      --lang=*)
+        _u_language="${1#*=}"
+        shift
+        ;;
+
+      --out=*)
+        _u_out_dir="${1#*=}"
+        shift
+        ;;
+
+      -o)
+        # Don't parse -o argument to antlr
+        # because there is already --out argument
+        shift 2
+        ;;
+
+      *)
+        # let default antlr4 parameter flows...
+        _positional_param+=("${key}")
+        shift
+        ;;
+    esac
+  done
+
+  # restore positional parameters
+  eval set -- "${_positional_param[@]}"
+
+  eval "${_ANTLR4}" -o "${_u_out_dir:-${_OUTPUT_PATH}}" -Dlanguage="${_u_language:-${_DEFAULT_LANGUAGE}}" "$@"
+}
+
+main "$@"
