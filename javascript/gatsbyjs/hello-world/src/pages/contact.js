@@ -1,13 +1,21 @@
 import React from 'react';
-import { Link } from 'gatsby';
-
-import Header from '../components/header';
+// Part 1-2
+// import { Link } from 'gatsby';
+// Part 1-2
+// import Header from '../components/header';
 
 export default () => (
-  <div style={{ color: 'purple' }}>
-    <Link to="/">Home</Link>
-    <Header text="Contact" />
-    <p>What a world!</p>
-    <img src="https://source.unsplash.com/random/400x200" alt="" />
+  // Part 1-2
+  // <div style={{ color: 'purple' }}>
+  //   <Link to="/">Home</Link>
+  //   <Header text="Contact" />
+  //   <p>What a world!</p>
+  //   <img src="https://source.unsplash.com/random/400x200" alt="" />
+  // </div>
+  <div>
+    <h1>I'd love to talk! Email me at the address below</h1>
+    <p>
+      <a href="mailto:me@example.com">me@example.com</a>
+    </p>
   </div>
 );
