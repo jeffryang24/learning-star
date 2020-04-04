@@ -15,4 +15,7 @@ module.exports = {
     },
     'gatsby-plugin-styled-components',
   ],
+  siteMetadata: {
+    title: 'Pandas Eating Lots',
+  },
 };

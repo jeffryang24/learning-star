@@ -7,7 +7,7 @@ const ListLink = styled.ul`
   float: right;
 `;
 
-const ListLinkItem = styled(props => (
+const ListLinkItem = styled((props) => (
   <li className={props.className}>
     <Link to={props.to}>{props.children}</Link>
   </li>
@@ -16,7 +16,7 @@ const ListLinkItem = styled(props => (
   margin-right: 1rem;
 `;
 
-const Header = styled(props => (
+const Header = styled((props) => (
   <header className={props.className}>
     <Link to="/" style={{ textShadow: `none`, backgroundImage: `none` }}>
       <h3 style={{ display: `inline` }}>MySweetSite</h3>
@@ -24,6 +24,7 @@ const Header = styled(props => (
 
     <ListLink>
       <ListLinkItem to="/">Home</ListLinkItem>
+      <ListLinkItem to="/index-4">Index 4</ListLinkItem>
       <ListLinkItem to="/about/">About</ListLinkItem>
       <ListLinkItem to="/contact/">Contact</ListLinkItem>
     </ListLink>
@@ -32,7 +33,7 @@ const Header = styled(props => (
   margin-bottom: 1.5rem;
 `;
 
-export default styled(props => (
+export default styled((props) => (
   <div className={props.className}>
     <Header />
     {props.children}
