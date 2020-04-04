@@ -15,6 +15,12 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        excerpt_separator: `<!-- endexcerpt -->`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography`,

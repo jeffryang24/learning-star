@@ -25,6 +25,7 @@ const Header = styled((props) => (
     <ListLink>
       <ListLinkItem to="/">Home</ListLinkItem>
       <ListLinkItem to="/index-4">Index 4</ListLinkItem>
+      <ListLinkItem to="/index-6">Index 6</ListLinkItem>
       <ListLinkItem to="/about/">About</ListLinkItem>
       <ListLinkItem to="/contact/">Contact</ListLinkItem>
     </ListLink>
