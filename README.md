@@ -6,6 +6,6 @@
 
 # Learning :star:
 
-This is a monorepo for every language that I learnt before. I know some of the exercise were not done in schedule, some project are in dangling state, but I just keep learning it while I still have time to reach it.
+This is a monorepo for every language that I learnt before. I know some of the exercise were not done in schedule, some project were in dangling state, but I just keep learning it while I still have time to reach it.
 
-> Too old to know `C`, while in the youth time always got A. It's not too late to learn something, cause we are learning the star above us.
+> Too old to know `C`, while in the youth time always got A. It is not too late to learn something, cause we are learning the star above us.
