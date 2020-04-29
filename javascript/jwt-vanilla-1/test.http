@@ -1,0 +1,21 @@
+@testHost = http://localhost:8080
+
+# Test Login
+POST {{testHost}}/signin
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "user2",
+  "password": "password2"
+}
+
+###
+
+# Test welcome
+GET {{testHost}}/welcome
+
+###
+
+# Test renew token
+POST {{testHost}}/refresh
