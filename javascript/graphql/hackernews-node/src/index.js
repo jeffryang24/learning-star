@@ -8,25 +8,11 @@ const links = [
   },
 ];
 
-const typeDefs = `
-  type Query {
-    feed: [Link!]!
-    hello(name: String): String!
-    info: String!
-  }
-
-  type Link {
-    description: String!
-    id: ID!
-    url: String!
-  }
-`;
-
 const resolvers = {
   Query: {
     feed: () => links,
     hello: (_, { name }) => `Hello ${name || 'World'}`,
-    info: () => null,
+    info: () => 'Hacker hour',
   },
   Link: {
     id: parent => parent.id,
@@ -37,6 +23,6 @@ const resolvers = {
 
 const server = new GraphQLServer({
   resolvers,
-  typeDefs,
+  typeDefs: './src/schema.graphql',
 });
 server.start(() => console.log('Server is running on port 4000'));
