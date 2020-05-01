@@ -1,5 +1,13 @@
 const { GraphQLServer } = require('graphql-yoga');
 
+const links = [
+  {
+    id: 'link-0',
+    url: 'www.howtographql.com',
+    description: 'How to graphql',
+  },
+];
+
 const typeDefs = `
   type Query {
     feed: [Link!]!
@@ -16,8 +24,14 @@ const typeDefs = `
 
 const resolvers = {
   Query: {
+    feed: () => links,
     hello: (_, { name }) => `Hello ${name || 'World'}`,
     info: () => null,
+  },
+  Link: {
+    id: parent => parent.id,
+    description: parent => parent.description,
+    url: parent => parent.url,
   },
 };
 
