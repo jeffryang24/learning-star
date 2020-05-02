@@ -1,0 +1,6 @@
+CREATE TABLE link (
+  id SERIAL PRIMARY KEY,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  description VARCHAR(255),
+  url VARCHAR(50) NOT NULL
+)
