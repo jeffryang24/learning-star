@@ -10,6 +10,8 @@
   },
   "scripts": {
     "dev": "node src/index.js",
+    "dev:main": "node src/main.js",
+    "dev:realdb": "node src/index_realdb.js",
     "p:gen": "prisma generate"
   },
   "devDependencies": {
