@@ -12,6 +12,7 @@ type Mutation {
 }
 
 type Link {
+  created_at: String!
   description: String
   id: ID!
   url: String!
