@@ -1,14 +1,14 @@
 module.exports = {
-  link: async (parent, _, context) => {
-    return await context.prisma.member.findMany({
-      where: {
-        id: {
-          equals: parent.id,
+  links: async (parent, _, context) => {
+    return (
+      await context.prisma.member.findOne({
+        where: {
+          id: parent.id,
         },
-      },
-      select: {
-        link: true,
-      },
-    });
+        select: {
+          link: true,
+        },
+      })
+    ).link;
   },
 };

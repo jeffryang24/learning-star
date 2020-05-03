@@ -25,7 +25,7 @@ type Member {
   id: ID!
   name: String!
   email: String!
-  link: [Link!]!
+  links: [Link!]!
 }
 
 type AuthPayload {

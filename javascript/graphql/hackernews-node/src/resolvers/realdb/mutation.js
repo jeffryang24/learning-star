@@ -34,7 +34,7 @@ module.exports = {
   login: async (_, args, context) => {
     const { password, ...user } = await context.prisma.member.findOne({
       where: {
-        email: user.email,
+        email: args.email,
       },
     });
     if (!user) {
