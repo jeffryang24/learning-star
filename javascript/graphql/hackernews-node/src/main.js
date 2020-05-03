@@ -9,6 +9,7 @@ async function main() {
       description: 'Prisma replaces traditional ORMs 2',
     },
   });
+
   console.log(`Created new link: ${newLink.url} (ID: ${newLink.id})`);
 
   const allLinks = await prisma.link.findMany({ first: 5 });

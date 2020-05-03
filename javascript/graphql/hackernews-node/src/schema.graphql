@@ -9,6 +9,8 @@ type Mutation {
   post(url: String!, description: String): Link!
   updateLink(id: ID!, url: String, description: String): Link
   deleteLink(id: ID!): Link
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
 }
 
 type Link {
@@ -16,4 +18,17 @@ type Link {
   description: String
   id: ID!
   url: String!
+  posted_by: Member
+}
+
+type Member {
+  id: ID!
+  name: String!
+  email: String!
+  link: [Link!]!
+}
+
+type AuthPayload {
+  token: String
+  user: Member
 }

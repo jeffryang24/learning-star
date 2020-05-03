@@ -11,5 +11,15 @@ model link {
   created_at  DateTime @default(now())
   description String?
   id          Int      @default(autoincrement()) @id
+  posted_by   Int?
   url         String
+  member      member?  @relation(fields: [posted_by], references: [id])
+}
+
+model member {
+  email    String @unique
+  id       Int    @default(autoincrement()) @id
+  name     String
+  password String
+  link     link[]
 }
