@@ -19,3 +19,8 @@ doubleList processedList remainingList = if null remainingList
   then processedList
   else doubleList (processedList ++ [head remainingList * 2])
                   (tail remainingList)
+
+evenList :: Int -> [Int] -> [Int]
+evenList n lst | n == 0       = lst
+               | mod n 2 == 0 = evenList (n - 1) (n : lst)
+               | otherwise    = evenList (n - 1) lst
