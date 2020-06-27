@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 264e6da572079720934000745ce41997d6ea35742b6594642ea7c125e4ce50d9
+-- hash: 8f20bae0655096600267b2dcd5132f1a010505ade73181114663144df4732fc9
 
 name:           vacationlabs
 version:        0.1.0.0
@@ -27,6 +27,7 @@ source-repository head
 
 library
   exposed-modules:
+      Exercise
       Lib
       SumOfList
       Throwaway
