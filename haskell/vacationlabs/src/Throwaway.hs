@@ -17,3 +17,17 @@ toUpperCase processedString remainingString = if null remainingString
   then processedString
   else toUpperCase (processedString ++ [toUpper (head remainingString)])
                    (tail remainingString)
+
+isCharPresent :: Char -> String -> Bool
+isCharPresent needle remainingString =
+  not (null remainingString)
+    && (  (needle == head remainingString)
+       || isCharPresent needle (tail remainingString)
+       )
+
+isStringPresent :: String -> String -> Bool
+isStringPresent needles haystack =
+  null needles
+    || (  isCharPresent (head needles) haystack
+       && isStringPresent (tail needles) haystack
+       )
