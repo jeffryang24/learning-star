@@ -36,6 +36,12 @@ fibonacci n | n < 1     = 0
             | n == 1    = 1
             | otherwise = fibonacci (n - 1) + fibonacci (n - 2)
 
+memoizeFibonacci :: Int -> Int
+memoizeFibonacci n | n < 1     = 0
+                   | n == 1    = 1
+                   | otherwise = fibs !! (n - 1) + fibs !! (n - 2)
+  where fibs = map memoizeFibonacci [0 ..]
+
 sumEvenFibonacci :: Int -> Int -> Int -> Int
 sumEvenFibonacci maxValue n total
   | total + nextFibonacci > maxValue = total
@@ -44,5 +50,5 @@ sumEvenFibonacci maxValue n total
                                                    (total + currentFibonacci)
   | otherwise = sumEvenFibonacci maxValue (n + 1) total
  where
-  currentFibonacci = fibonacci n
-  nextFibonacci    = fibonacci n + 1
+  currentFibonacci = memoizeFibonacci n
+  nextFibonacci    = memoizeFibonacci n + 1
