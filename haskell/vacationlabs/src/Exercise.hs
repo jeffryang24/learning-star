@@ -1,5 +1,7 @@
 module Exercise where
 
+import           Data.Char                      ( ord )
+
 isLeapYear :: Int -> Bool
 isLeapYear year | mod year 100 == 0 = mod year 400 == 0
                 | otherwise         = mod year 4 == 0
@@ -52,3 +54,30 @@ sumEvenFibonacci maxValue n total
  where
   currentFibonacci = memoizeFibonacci n
   nextFibonacci    = memoizeFibonacci n + 1
+
+normalizeIsbn :: String -> String
+normalizeIsbn = normalizeIsbnInternal ""
+
+normalizeIsbnInternal :: String -> String -> String
+normalizeIsbnInternal normalizedIsbn isbn
+  | not (null isbn) && ord currentChar == 45 = normalizeIsbnInternal
+    normalizedIsbn
+    (tail isbn)
+  | not (null isbn) = normalizeIsbnInternal (normalizedIsbn ++ [currentChar])
+                                            (tail isbn)
+  | otherwise = normalizedIsbn
+  where currentChar = head isbn
+
+isValidIsbn :: String -> Bool
+isValidIsbn isbn | length normalizedIsbn /= 10 = False
+                 | otherwise = isValidIsbnInternal normalizedIsbn 10 0
+  where normalizedIsbn = normalizeIsbn isbn
+
+isValidIsbnInternal :: String -> Int -> Int -> Bool
+isValidIsbnInternal remainingString currentMultiplier total
+  | currentMultiplier > 0 = isValidIsbnInternal
+    (tail remainingString)
+    (currentMultiplier - 1)
+    (total + (currentChar * currentMultiplier))
+  | otherwise = mod total 11 == 0
+  where currentChar = ord (head remainingString)
