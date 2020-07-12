@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 8f20bae0655096600267b2dcd5132f1a010505ade73181114663144df4732fc9
+-- hash: cc924cf3776f3dba560cae87d5692bddfa639e1ea52e496fcc042f8a83f2b980
 
 name:           vacationlabs
 version:        0.1.0.0
@@ -29,6 +29,8 @@ library
   exposed-modules:
       Exercise
       Lib
+      Pangram
+      RailFenceCipher
       SumOfList
       Throwaway
   other-modules:
