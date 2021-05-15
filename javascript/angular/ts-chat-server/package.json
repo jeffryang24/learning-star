@@ -19,7 +19,7 @@
   "homepage": "https://github.com/jeffryang24/ts-chat-server#readme",
   "dependencies": {
     "@types/express": "^4.17.11",
-    "@types/socket.io": "^2.1.13",
+    "@types/socket.io": "^3.0.2",
     "express": "^4.17.1",
     "socket.io": "^4.1.1"
   },
