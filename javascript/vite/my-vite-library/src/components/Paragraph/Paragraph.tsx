@@ -1,3 +1,4 @@
+import React from 'react';
 import { css } from '@emotion/react';
 import { RedRibbon } from '../../constants/color';
 
