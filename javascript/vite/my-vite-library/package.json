@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:constants": "vite build --config ./src/constants/vite.config.ts",
+    "build:types": "tsc --project tsconfig.types.json",
     "serve": "vite preview",
     "typecheck": "tsc --noEmit"
   },
@@ -32,6 +32,7 @@
     "@vitejs/plugin-react-refresh": "^1.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "typescript": "^4.2.4",
     "vite": "^2.3.2"
   },

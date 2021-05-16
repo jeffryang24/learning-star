@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from '@emotion/styled';
 
-import { RedRibbon } from '../../constants/src/color';
+import { RedRibbon } from '../../constants/color';
 
 interface Props {
   name: string;
@@ -9,6 +8,8 @@ interface Props {
 
 const StyledButton = styled.button`
   background-color: ${RedRibbon};
+  color: blue;
+  font-size: 14px;
 `;
 
 export default function Button(props: Props) {
