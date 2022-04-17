@@ -9,3 +9,5 @@ change_pass [users appschema] 2022-04-16T16:20:23Z Jeffry Angtoni <jeffryangtoni
 @v1.0.0-dev1 2022-04-17T05:51:28Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Tag v1.0.0-dev1.
 
 flips [appschema users] 2022-04-17T06:15:21Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Add table for storing flips.
+insert_flip [users appschema flips] 2022-04-17T06:24:27Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Create a function to insert a flip.
+delete_flip [users appschema flips] 2022-04-17T06:24:46Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Create a function to delete a flip.
