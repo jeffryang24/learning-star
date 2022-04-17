@@ -1,0 +1,14 @@
+%syntax-version=1.0.0
+%project=flipr
+%uri=https://github.com/jeffryang24/learning-star
+
+appschema 2022-04-16T07:13:15Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Add schema for all flipr objects.
+users [appschema] 2022-04-16T15:46:45Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Create table to track our users.
+insert_user [users appschema] 2022-04-16T16:19:54Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Create a function to insert a user.
+change_pass [users appschema] 2022-04-16T16:20:23Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Create a function to change a user password.
+@v1.0.0-dev1 2022-04-17T05:51:28Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Tag v1.0.0-dev1.
+
+flips [appschema users] 2022-04-17T06:15:21Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Add table for storing flips.
+insert_flip [users appschema flips] 2022-04-17T06:24:27Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Create a function to insert a flip.
+delete_flip [users appschema flips] 2022-04-17T06:24:46Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Create a function to delete a flip.
+@v1.0.0-dev2 2022-04-17T06:33:45Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Tag v1.0.0-dev2.
