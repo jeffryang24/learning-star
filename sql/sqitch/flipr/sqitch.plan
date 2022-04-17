@@ -7,3 +7,5 @@ users [appschema] 2022-04-16T15:46:45Z Jeffry Angtoni <jeffryangtoni24@gmail.com
 insert_user [users appschema] 2022-04-16T16:19:54Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Create a function to insert a user.
 change_pass [users appschema] 2022-04-16T16:20:23Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Create a function to change a user password.
 @v1.0.0-dev1 2022-04-17T05:51:28Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Tag v1.0.0-dev1.
+
+flips [appschema users] 2022-04-17T06:15:21Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Add table for storing flips.
