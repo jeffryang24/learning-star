@@ -1,6 +1,8 @@
 -- Deploy flipr:change_pass to pg
 -- requires: users
 -- requires: appschema
+-- requires: enable_pgcrypto
+
 
 BEGIN;
 
@@ -15,9 +17,9 @@ CREATE OR REPLACE FUNCTION flipr.change_pass(
 AS $$
 BEGIN
   UPDATE flipr.users
-  SET password = MD5($3)
+  SET password = CRYPT($3, GEN_SALT('md5'))
   WHERE nickname = $1
-    AND password = MD5($2);
+    AND password = CRYPT($2, password);
   RETURN FOUND;
 END;
 $$;

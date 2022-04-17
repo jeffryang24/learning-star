@@ -14,3 +14,5 @@ delete_flip [users appschema flips] 2022-04-17T06:24:46Z Jeffry Angtoni <jeffrya
 @v1.0.0-dev2 2022-04-17T06:33:45Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Tag v1.0.0-dev2.
 
 enable_pgcrypto 2022-04-17T06:43:53Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Enable pgcrypto extension
+insert_user [insert_user@v1.0.0-dev2 enable_pgcrypto] 2022-04-17T07:00:10Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Change insert_user to use pgcrypto.
+change_pass [change_pass@v1.0.0-dev2 enable_pgcrypto] 2022-04-17T07:07:55Z Jeffry Angtoni <jeffryangtoni24@gmail.com> # Change change_pass to use pgcrypto.
