@@ -1,0 +1,3 @@
+[submodule "docker/udemy-docker-mastery"]
+	path = docker/udemy-docker-mastery
+	url = git@github.com:jeffryang24/udemy-docker-mastery.git
