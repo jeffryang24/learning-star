@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b8e8077-b57b-4af8-a497-914fafd34601" name="Changes" comment="" />
+    <list default="true" id="7b8e8077-b57b-4af8-a497-914fafd34601" name="Changes" comment="chore(udemy-scala): add scalafmt config">
+      <change afterPath="$PROJECT_DIR$/src/main/scala/com/learningstar/introduction/Expression.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/scala/com/learningstar/introduction/HelloWorldV2.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/scala/com/learningstar/introduction/Playground.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/scala/com/learningstar/part1/Function.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,6 +40,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
   </component>
@@ -45,11 +55,74 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "last_opened_file_path": "/home/jeffry.angtoni/sources/oss/github/learning-star/scala/rock-the-jvm-udemy/udemy-scala-beginners",
     "scala_project_settings_configurable.last_selected_tab_index": "7",
-    "settings.editor.selected.configurable": "sbt.project.settings.configurable"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
+  <component name="RunManager" selected="Application.Function">
+    <configuration name="Expression" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.learningstar.introduction.Expression" />
+      <module name="udemy-scala-beginners" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.learningstar.introduction.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Function" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.learningstar.part1.Function" />
+      <module name="udemy-scala-beginners" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.learningstar.part1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HelloWorldV2" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.learningstar.introduction.HelloWorldV2" />
+      <module name="udemy-scala-beginners" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.learningstar.introduction.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Playground" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.learningstar.introduction.Playground" />
+      <module name="udemy-scala-beginners" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.learningstar.introduction.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Function" />
+        <item itemvalue="Application.Expression" />
+        <item itemvalue="Application.HelloWorldV2" />
+        <item itemvalue="Application.Playground" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="ScalaProjectSettings">
     <option name="intInjectionMapping">
       <map>
@@ -76,7 +149,35 @@
       <option name="presentableId" value="Default" />
       <updated>1670052681237</updated>
     </task>
+    <task id="LOCAL-00001" summary="chore(udemy-scala): add gitignore">
+      <created>1670053726068</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1670053726068</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat(udemy-scala): initialize project">
+      <created>1670053751140</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670053751140</updated>
+    </task>
+    <task id="LOCAL-00003" summary="chore(udemy-scala): add scalafmt config">
+      <created>1670053868778</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670053868778</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chore(udemy-scala): add gitignore" />
+    <MESSAGE value="feat(udemy-scala): initialize project" />
+    <MESSAGE value="chore(udemy-scala): add scalafmt config" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore(udemy-scala): add scalafmt config" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
