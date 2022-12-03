@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b8e8077-b57b-4af8-a497-914fafd34601" name="Changes" comment="feat(udemy-scala): part 1 still continue">
-      <change afterPath="$PROJECT_DIR$/src/main/scala/com/learningstar/part1/Recursion.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/scala/com/learningstar/part1/CallByStar.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.scalafmt.conf" beforeDir="false" afterPath="$PROJECT_DIR$/.scalafmt.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,17 +49,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "last_opened_file_path": "/home/jeffry.angtoni/sources/oss/github/learning-star/scala/rock-the-jvm-udemy/udemy-scala-beginners",
-    "scala_project_settings_configurable.last_selected_tab_index": "7",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/jeffry.angtoni/sources/oss/github/learning-star/scala/rock-the-jvm-udemy/udemy-scala-beginners&quot;,
+    &quot;scala_project_settings_configurable.last_selected_tab_index&quot;: &quot;7&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Application.Recursion">
+}</component>
+  <component name="RunManager" selected="Application.CallByStar">
+    <configuration name="CallByStar" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.learningstar.part1.CallByStar" />
+      <module name="udemy-scala-beginners" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.learningstar.part1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Expression" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.learningstar.introduction.Expression" />
       <module name="udemy-scala-beginners" />
@@ -98,19 +112,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Playground" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="com.learningstar.introduction.Playground" />
-      <module name="udemy-scala-beginners" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.learningstar.introduction.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Recursion" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.learningstar.part1.Recursion" />
       <module name="udemy-scala-beginners" />
@@ -126,11 +127,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CallByStar" />
         <item itemvalue="Application.Recursion" />
         <item itemvalue="Application.Function" />
         <item itemvalue="Application.Expression" />
         <item itemvalue="Application.HelloWorldV2" />
-        <item itemvalue="Application.Playground" />
       </list>
     </recent_temporary>
   </component>
@@ -202,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670057536343</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat(udemy-scala): part 1 still continue">
+      <created>1670060322959</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1670060322959</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
