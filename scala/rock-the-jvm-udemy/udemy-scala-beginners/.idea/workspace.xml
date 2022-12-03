@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b8e8077-b57b-4af8-a497-914fafd34601" name="Changes" comment="chore(udemy-scala): add scalafmt config">
-      <change afterPath="$PROJECT_DIR$/src/main/scala/com/learningstar/introduction/Expression.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/scala/com/learningstar/introduction/HelloWorldV2.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/scala/com/learningstar/introduction/Playground.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/scala/com/learningstar/part1/Function.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="7b8e8077-b57b-4af8-a497-914fafd34601" name="Changes" comment="feat(udemy-scala): part 1 still continue">
+      <change afterPath="$PROJECT_DIR$/src/main/scala/com/learningstar/part1/Recursion.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +58,7 @@
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.Function">
+  <component name="RunManager" selected="Application.Recursion">
     <configuration name="Expression" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.learningstar.introduction.Expression" />
       <module name="udemy-scala-beginners" />
@@ -114,8 +111,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Recursion" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.learningstar.part1.Recursion" />
+      <module name="udemy-scala-beginners" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.learningstar.part1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Recursion" />
         <item itemvalue="Application.Function" />
         <item itemvalue="Application.Expression" />
         <item itemvalue="Application.HelloWorldV2" />
@@ -170,14 +181,38 @@
       <option name="project" value="LOCAL" />
       <updated>1670053868778</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="chore(udemy-scala): ignore idea folder">
+      <created>1670057512519</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670057512519</updated>
+    </task>
+    <task id="LOCAL-00005" summary="chore(udemy-scala): idea">
+      <created>1670057519577</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1670057519577</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat(udemy-scala): part 1 still continue">
+      <created>1670057536343</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1670057536343</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore(udemy-scala): add gitignore" />
     <MESSAGE value="feat(udemy-scala): initialize project" />
     <MESSAGE value="chore(udemy-scala): add scalafmt config" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore(udemy-scala): add scalafmt config" />
+    <MESSAGE value="chore(udemy-scala): ignore idea folder" />
+    <MESSAGE value="chore(udemy-scala): idea" />
+    <MESSAGE value="feat(udemy-scala): part 1 still continue" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(udemy-scala): part 1 still continue" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
