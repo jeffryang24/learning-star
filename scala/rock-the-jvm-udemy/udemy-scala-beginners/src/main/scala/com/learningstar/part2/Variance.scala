@@ -109,4 +109,6 @@ object Variance extends App {
   }))
   println(d ++ e)
   println(d.flatMap(el => Cons(el + 1, Empty)))
+  sayHello()  // From package object
+  println(Constant) // From package object
 }
