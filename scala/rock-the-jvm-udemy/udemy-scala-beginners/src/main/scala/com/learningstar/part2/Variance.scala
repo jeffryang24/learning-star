@@ -10,6 +10,10 @@ abstract class MyList[+A] {
   def flatMap[B](transformer: MyTransformer[A, MyList[B]]): MyList[B]
   def filter(predicate: MyPredicate[A]): MyList[A]
   def ++[B >: A](list: MyList[B]): MyList[B]
+  def foreach(f: A => Unit): Unit
+  def sort(compare: (A, A) => Int): MyList[A]
+  def zipWith[B, C](list: MyList[B], zip: (A, B) => C): MyList[C]
+  def fold[B](start: B)(operator: (B, A) => B): B
 
   override def toString: String = s"[$printElements]"
 }
@@ -32,6 +36,17 @@ case object Empty extends MyList[Nothing] {
   override def filter(predicate: MyPredicate[Nothing]): MyList[Nothing] = Empty
 
   override def ++[B >: Nothing](list: MyList[B]): MyList[B] = list
+
+  override def foreach(f: Nothing => Unit): Unit = ()
+
+  override def sort(compare: (Nothing, Nothing) => Int): MyList[Nothing] = Empty
+
+  override def zipWith[B, C](list: MyList[B], zip: (Nothing, B) => C): MyList[C] = {
+    if (!list.isEmpty) throw new RuntimeException("list does not have same length")
+    else Empty
+  }
+
+  override def fold[B](start: B)(operator: (B, Nothing) => B): B = start
 }
 
 case class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
@@ -64,6 +79,32 @@ case class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
   override def ++[B >: A](list: MyList[B]): MyList[B] = {
     Cons(h, t ++ list)
   }
+
+  override def foreach(f: A => Unit): Unit = {
+    f(h)
+    t.foreach(f)
+  }
+
+  override def sort(compare: (A, A) => Int): MyList[A] = {
+    def insert(value: A, sortedList: MyList[A]): MyList[A] = {
+      if (sortedList.isEmpty) new Cons[A](value, Empty)
+      else if (compare(value, sortedList.head) < 0) new Cons[A](value, sortedList)
+      else if (compare(value, sortedList.head) == 0) new Cons[A](sortedList.head, sortedList.tail)
+      else new Cons[A](sortedList.head, insert(value, sortedList.tail))
+    }
+
+    val shortedTail = t.sort(compare)
+    insert(h, shortedTail)
+  }
+
+  override def zipWith[B, C](list: MyList[B], zip: (A, B) => C): MyList[C] = {
+    if (list.isEmpty) throw new RuntimeException("list does not have same length")
+    else new Cons[C](zip(h, list.head), t.zipWith(list.tail, zip))
+  }
+
+  override def fold[B](start: B)(operator: (B, A) => B): B = {
+    t.fold(operator(start, h))(operator)
+  }
 }
 
 trait MyPredicate[-T] {
@@ -93,8 +134,8 @@ class Zebra extends Animal {
 }
 
 object Variance extends App {
-  val a: MyList[Lion] = Cons(new Lion, Cons(new Lion, Empty))
-  val b: MyList[Animal] = Cons(new Lion, Cons(new Zebra, Empty))
+  val a: MyList[Lion] = Cons(new Lion, Cons(new Lion, Cons(new Lion, Empty)))
+  val b: MyList[Animal] = Cons(new Lion, Cons(new Zebra, Cons(new Lion, Empty)))
   val c = a.add(new Zebra)
   println(a.printElements)
   println(c.printElements)
@@ -111,4 +152,9 @@ object Variance extends App {
   println(d.flatMap(el => Cons(el + 1, Empty)))
   sayHello()  // From package object
   println(Constant) // From package object
+
+  d.foreach(println)
+  println(d.sort((x, y) => y - x))
+  println(d.zipWith(a, _ + " " + _))
+  println(d.fold(0)(_ + _))
 }
