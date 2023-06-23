@@ -46,4 +46,22 @@ object AdvancedPatternMatching extends App {
     case even()        => "even number"
     case _             => "unknown"
   println(mathProperty)
+
+  // Custom return type for unapply
+  abstract class Wrapper[T] {
+    def isEmpty: Boolean
+
+    def get: T
+  }
+
+  object PersonWrapper {
+    def unapply(person: Person): Wrapper[String] = new Wrapper[String] {
+      override def isEmpty: Boolean = false
+      override def get: String = person.name
+    }
+  }
+  val testPatternMatch = bob match
+    case PersonWrapper(p) => s"This person name is $p"
+    case _ => "Alien"
+  println(testPatternMatch)
 }
