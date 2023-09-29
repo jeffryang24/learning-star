@@ -1,0 +1,4 @@
+rootProject.name = 'spring-boot-2'
+include 'spring-boot-clr'
+include 'spring-boot-clr'
+
