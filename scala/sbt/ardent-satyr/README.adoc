@@ -1,0 +1,3 @@
+= ardent-satyr
+
+This is a sbt-exploration project based on https://www.scala-sbt.org/1.x/docs/sbt-by-example.html
